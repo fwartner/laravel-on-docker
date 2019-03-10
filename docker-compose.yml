@@ -22,14 +22,12 @@ services:
     networks: 
       - appnet
     ports:
-      - '33061:3306'
+      - '3306:3306'
     environment:
       MYSQL_ROOT_PASSWORD=changeme123
       MYSQL_DATABASE=app_db
       MYSQL_USER=app_db_user
       MYSQL_PASSWORD=changeme123
-    volumes:
-      - dbdata:/var/lib/mysql
   redis:
     container_name: redis
     restart: unless-stopped
@@ -38,16 +36,7 @@ services:
     networks: 
       - appnet
     ports:
-      - '63791:6379'
-    volumes:
-      - cachedata:/data
+      - '6379:6379'
 networks: 
   appnet:
     driver: bridge
-volumes:
-  dbdata:
-    driver: local
-  cachedata:
-    driver: local
-  appdata:
-    driver: local
