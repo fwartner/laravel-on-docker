@@ -1,12 +1,12 @@
 version: '2'
 services:
-  app:
+  application:
     image: 'fwartner/php-7.3'
     ports:
       - '80:80'
     volumes:
       - './supervisor:/etc/supervisor/conf.d'
-      - '.:/var/www/html/'
+      - '.:/var/www/html'
     networks: 
       - appnet
   mysql:
