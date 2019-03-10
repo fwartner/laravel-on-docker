@@ -20,12 +20,21 @@ services:
       - MYSQL_DATABASE=app_db
       - MYSQL_USER=app_db_user
       - MYSQL_PASSWORD=changeme123
+    volumes:
+      - dbdata:/var/lib/mysql
   redis:
     image: 'redis:latest'
     networks: 
       - appnet
     ports:
       - '6379:6379'
+    volumes:
+      - cachedata:/data
 networks: 
   appnet:
     driver: bridge
+volumes:
+  dbdata:
+    driver: local
+  cachedata:
+    driver: local

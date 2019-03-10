@@ -41,7 +41,7 @@ services:
 
 Run `docker-compose up -d` to run the application in the background.
 
-To install the composer dependencies run `docker run -t --rm -v $(pwd):/var/www/html fwartner/php-7.3 composer install`.
+To install the composer dependencies run `docker run -t --rm -v $(pwd):/var/www/html fwartner/php-7.3 composer install`
 
 Access your application on `http://YOUR-HOST.TLD` (The application is exposed on port 80)
 
