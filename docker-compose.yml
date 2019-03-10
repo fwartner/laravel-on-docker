@@ -22,8 +22,6 @@ services:
      - appnet
   redis:
     image: redis:alpine
-    ports:
-     - "6380:6380"
     volumes:
      - redisdata:/data
     networks:
