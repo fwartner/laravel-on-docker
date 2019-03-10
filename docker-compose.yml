@@ -1,28 +1,31 @@
+version: '2'
 services:
   app:
-    image: fwartner/php-7.3
-    volumes:
-      - .:/var/www/html
+    image: 'fwartner/php-7.3'
     ports:
-      - "80:80"
-    networks:
+      - '8011:80'
+    volumes:
+      - './supervisor:/etc/supervisor/conf.d'
+      - '.:/var/www/html/'
+    networks: 
       - appnet
   mysql:
-    image: mysql:5.7
-    volumes:
-      - mysqldata:/var/lib/mysql
+    image: mysql
+    networks: 
+      - appnet
     ports:
-      - "3306:3306"
+      - '33061:3306'
     environment:
-      MYSQL_ROOT_PASSWORD: "changeme123"
-      MYSQL_DATABASE: "app_db"
-      MYSQL_USER: "app_db_user"
-      MYSQL_PASSWORD: "changeme123"
-    networks:
-      - appnet
+      - MYSQL_ROOT_PASSWORD=changeme123
+      - MYSQL_DATABASE=app_db
+      - MYSQL_USER=app_db_user
+      - MYSQL_PASSWORD=changeme123
   redis:
-    image: redis:alpine
-    volumes:
-      - redisdata:/data
-    networks:
+    image: 'redis:latest'
+    networks: 
       - appnet
+    ports:
+      - '63791:6379'
+networks: 
+  appnet:
+    driver: bridge
