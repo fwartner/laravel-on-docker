@@ -3,7 +3,7 @@ services:
   app:
     image: 'fwartner/php-7.3'
     ports:
-      - '8011:80'
+      - '80:80'
     volumes:
       - './supervisor:/etc/supervisor/conf.d'
       - '.:/var/www/html/'
@@ -14,7 +14,7 @@ services:
     networks: 
       - appnet
     ports:
-      - '33061:3306'
+      - '3306:3306'
     environment:
       - MYSQL_ROOT_PASSWORD=changeme123
       - MYSQL_DATABASE=app_db
@@ -25,7 +25,7 @@ services:
     networks: 
       - appnet
     ports:
-      - '63791:6379'
+      - '6379:6379'
 networks: 
   appnet:
     driver: bridge
