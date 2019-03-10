@@ -44,7 +44,7 @@ Run `docker-compose up -d` to run the application in the background.
 Access your application on `http://YOUR-HOST.TLD` (The application is exposed on port 80)
 
 ## Migrating the database
-Run `docker run -t --rm -v $(pwd):/var/www/html fwartner:php-7.3 php artisan migrate --force` in order to migrate the database. But before that you´ll need to make sure that your `.env` has the correct database-connection values.
+Run `docker run -t --rm -v $(pwd):/var/www/html fwartner/php-7.3 php artisan migrate --force` in order to migrate the database. But before that you´ll need to make sure that your `.env` has the correct database-connection values.
 
 Edit your .env like this:
 ```
