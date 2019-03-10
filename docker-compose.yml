@@ -24,10 +24,10 @@ services:
     ports:
       - '3306:3306'
     environment:
-      MYSQL_ROOT_PASSWORD=changeme123
-      MYSQL_DATABASE=app_db
-      MYSQL_USER=app_db_user
-      MYSQL_PASSWORD=changeme123
+      MYSQL_ROOT_PASSWORD: changeme123
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: app_db_user
+      MYSQL_PASSWORD: changeme123
   redis:
     container_name: redis
     restart: unless-stopped
