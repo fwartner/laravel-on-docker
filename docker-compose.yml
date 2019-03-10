@@ -1,0 +1,30 @@
+services:
+  app:
+    image: fwartner/php-7.3
+    volumes:
+     - .:/var/www/html
+    ports:
+     - "80:80"
+    networks:
+     - appnet
+  mysql:
+    image: mysql:5.7
+    volumes:
+     - mysqldata:/var/lib/mysql
+    ports:
+     - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "changeme123"
+      MYSQL_DATABASE: "app_db"
+      MYSQL_USER: "app_db_user"
+      MYSQL_PASSWORD: "changeme123"
+    networks:
+     - appnet
+  redis:
+    image: redis:alpine
+    ports:
+     - "6380:6380"
+    volumes:
+     - redisdata:/data
+    networks:
+     - appnet
