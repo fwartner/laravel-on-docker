@@ -9,7 +9,7 @@ services:
       - '.:/var/www/html'
     networks: 
       - appnet
-  mysql:
+  db:
     image: mysql
     networks: 
       - appnet
