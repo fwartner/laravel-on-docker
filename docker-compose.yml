@@ -7,7 +7,6 @@ services:
     volumes:
       - './supervisor:/etc/supervisor/conf.d'
       - '.:/var/www/html'
-      - appdata:/var/www/html
     networks: 
       - appnet
   db:
