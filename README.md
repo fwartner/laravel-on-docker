@@ -7,36 +7,46 @@ Running any laravel-application using the `fwartner/php-7.3` image is pretty sim
 Just create a `docker-compose.yml` within your project and edit it like the sample below:
 
 ```
+version: '2'
 services:
   app:
-    image: fwartner/php-7.3
-    volumes:
-     - .:/var/www/html
+    image: 'fwartner/php-7.3'
     ports:
-     - "80:80"
-    networks:
-     - appnet
+      - '80:80'
+    volumes:
+      - './supervisor:/etc/supervisor/conf.d'
+      - '.:/var/www/html/'
+    networks: 
+      - appnet
   mysql:
-    image: mysql:5.7
-    volumes:
-     - mysqldata:/var/lib/mysql
+    image: mysql
+    networks: 
+      - appnet
     ports:
-     - "3306:3306"
+      - '3306:3306'
     environment:
-      MYSQL_ROOT_PASSWORD: "changeme123"
-      MYSQL_DATABASE: "app_db"
-      MYSQL_USER: "app_db_user"
-      MYSQL_PASSWORD: "changeme123"
-    networks:
-     - appnet
-  redis:
-    image: redis:alpine
-    ports:
-     - "6380:6380"
+      - MYSQL_ROOT_PASSWORD=changeme123
+      - MYSQL_DATABASE=app_db
+      - MYSQL_USER=app_db_user
+      - MYSQL_PASSWORD=changeme123
     volumes:
-     - redisdata:/data
-    networks:
-     - appnet
+      - dbdata:/var/lib/mysql
+  redis:
+    image: 'redis:latest'
+    networks: 
+      - appnet
+    ports:
+      - '6379:6379'
+    volumes:
+      - cachedata:/data
+networks: 
+  appnet:
+    driver: bridge
+volumes:
+  dbdata:
+    driver: local
+  cachedata:
+    driver: local
 ```
 
 Run `docker-compose up -d` to run the application in the background.
